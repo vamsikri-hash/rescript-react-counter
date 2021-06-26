@@ -8,12 +8,22 @@ function s(str) {
   return str;
 }
 
+function reducer(state, action) {
+  if (typeof action === "number") {
+    if (action !== 0) {
+      return state - 1 | 0;
+    } else {
+      return state + 1 | 0;
+    }
+  } else {
+    return action._0;
+  }
+}
+
 function Counter(Props) {
   var initialCount = Props.initialCount;
-  var match = React.useState(function () {
-        return initialCount;
-      });
-  var setCount = match[1];
+  var match = React.useReducer(reducer, initialCount);
+  var dispatch = match[1];
   var count = match[0];
   var countColor = count > 0 ? "bg-green-400" : (
       count < 0 ? "bg-red-400" : "bg-yellow-400"
@@ -28,25 +38,21 @@ function Counter(Props) {
                       text: "Increment",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-green-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(setCount, (function (x) {
-                                        return x + 1 | 0;
-                                      }));
+                          return Curry._1(dispatch, /* Increment */0);
                         })
                     }), React.createElement(Button.make, {
                       text: "Decrement",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-red-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(setCount, (function (x) {
-                                        return x - 1 | 0;
-                                      }));
+                          return Curry._1(dispatch, /* Decrement */1);
                         })
                     }), React.createElement(Button.make, {
                       text: "Reset",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-yellow-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(setCount, (function (_x) {
-                                        return initialCount;
-                                      }));
+                          return Curry._1(dispatch, /* Reset */{
+                                      _0: initialCount
+                                    });
                         })
                     })));
 }
@@ -55,6 +61,7 @@ var make = Counter;
 
 export {
   s ,
+  reducer ,
   make ,
   
 }
