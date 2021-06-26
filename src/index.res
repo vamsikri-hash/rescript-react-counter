@@ -1,4 +1,4 @@
-let s = str => React.string(str)
+let s = React.string
 
 switch ReactDOM.querySelector("#root") {
 | Some(root) => ReactDOM.render(<Counter initialCount={0} />, root)

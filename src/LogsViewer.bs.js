@@ -4,8 +4,8 @@ import * as React from "react";
 import * as LogEntry from "./LogEntry.bs.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
 
-function s(str) {
-  return str;
+function s(prim) {
+  return prim;
 }
 
 function LogsViewer$LogItem(Props) {

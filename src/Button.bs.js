@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-function s(str) {
-  return str;
+function s(prim) {
+  return prim;
 }
 
 function Button(Props) {

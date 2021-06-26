@@ -1,6 +1,6 @@
 open LogEntry
 
-let s = str => React.string(str)
+let s = React.string
 
 type action = Increment | Decrement | Reset(int)
 

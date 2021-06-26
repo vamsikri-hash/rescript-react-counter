@@ -6,8 +6,8 @@ import * as Button from "./Button.bs.js";
 import * as LogEntry from "./LogEntry.bs.js";
 import * as LogsViewer from "./LogsViewer.bs.js";
 
-function s(str) {
-  return str;
+function s(prim) {
+  return prim;
 }
 
 function reducer(state, action) {
