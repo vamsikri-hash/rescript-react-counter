@@ -3,6 +3,8 @@
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Button from "./Button.bs.js";
+import * as LogEntry from "./LogEntry.bs.js";
+import * as LogsViewer from "./LogsViewer.bs.js";
 
 function s(str) {
   return str;
@@ -25,36 +27,51 @@ function Counter(Props) {
   var match = React.useReducer(reducer, initialCount);
   var dispatch = match[1];
   var count = match[0];
+  var match$1 = React.useState(function () {
+        return [];
+      });
+  var setHistory = match$1[1];
   var countColor = count > 0 ? "bg-green-400" : (
       count < 0 ? "bg-red-400" : "bg-yellow-400"
     );
   return React.createElement("div", {
-              className: "text-center mt-24 max-w-4xl mx-auto"
+              className: "mt-24 max-w-4xl mx-auto"
             }, React.createElement("p", {
                   className: countColor + " mb-8 py-4 text-4xl text-center"
                 }, "Count is  " + String(count)), React.createElement("div", {
-                  className: "flex justify-center"
+                  className: "flex justify-center mb-16"
                 }, React.createElement(Button.make, {
                       text: "Increment",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-green-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(dispatch, /* Increment */0);
+                          Curry._1(dispatch, /* Increment */0);
+                          return Curry._1(setHistory, (function (xs) {
+                                        return [LogEntry.LogEntry.make("Increment " + String(count))].concat(xs);
+                                      }));
                         })
                     }), React.createElement(Button.make, {
                       text: "Decrement",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-red-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(dispatch, /* Decrement */1);
+                          Curry._1(dispatch, /* Decrement */1);
+                          return Curry._1(setHistory, (function (xs) {
+                                        return [LogEntry.LogEntry.make("Decrement " + String(count))].concat(xs);
+                                      }));
                         })
                     }), React.createElement(Button.make, {
                       text: "Reset",
                       className: "border py-2 px-3 bg-gray-200 hover:bg-yellow-500 mr-2",
                       handleClick: (function (_mouseEvt) {
-                          return Curry._1(dispatch, /* Reset */{
-                                      _0: initialCount
-                                    });
+                          Curry._1(dispatch, /* Reset */{
+                                _0: initialCount
+                              });
+                          return Curry._1(setHistory, (function (xs) {
+                                        return [LogEntry.LogEntry.make("Reset @ " + String(count))].concat(xs);
+                                      }));
                         })
-                    })));
+                    })), React.createElement(LogsViewer.make, {
+                  logs: match$1[0]
+                }));
 }
 
 var make = Counter;
