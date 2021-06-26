@@ -4,8 +4,8 @@ import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Button from "./Button.bs.js";
 
-function s(str) {
-  return str;
+function s(prim) {
+  return prim;
 }
 
 function reducer(state, action) {
