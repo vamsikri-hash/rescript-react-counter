@@ -1,4 +1,4 @@
-let s = str => React.string(str)
+let s = React.string
 
 @react.component
 let make = (~initialCount) => {

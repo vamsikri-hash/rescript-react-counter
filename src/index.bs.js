@@ -4,8 +4,8 @@ import * as React from "react";
 import * as Counter from "./Counter.bs.js";
 import * as ReactDom from "react-dom";
 
-function s(str) {
-  return str;
+function s(prim) {
+  return prim;
 }
 
 var root = document.querySelector("#root");
